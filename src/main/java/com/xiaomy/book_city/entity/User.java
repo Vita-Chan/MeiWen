@@ -1,4 +1,5 @@
 package com.xiaomy.book_city.entity;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 
 public class User {

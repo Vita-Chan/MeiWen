@@ -2,7 +2,64 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xiaomy.book_city.mapper.UserMapper">
-<select id="findUserById" resultType="com.xiaomy.book_city.entity.User">
-  select * from sys_user where ID = #{id}
-</select>
+  <select id="findUserById" resultType="com.xiaomy.book_city.entity.User">
+    select * from sys_user where ID = #{id}
+  </select>
+
+  <update id="updateUser">
+    update sys_user
+    <set>
+      <if test="address != null">address = address,</if>
+      <if test="description != null">description = description,</if>
+      <if test="email != null">email = email,</if>
+      <if test="nickName != null">nick_name = nickName,</if>
+      <if test="sex > 0">sex = sex,</if>
+      <if test="telephone != null">telephone = telephone,</if>
+      <if test="updateTime != null">update_time = updateTime</if>
+    </set>
+    where id = #{id}
+  </update>
+
+  <select id="queryBuys" resultMap="resultBuy">
+    select
+    count(res_buy.id) as buyNum,
+    sum(res_buy.price) as amount,
+    res_data.id as id,
+    res_data.bookname as bookname,
+    res_data.author as author,
+    res_data.createtime as createtime,
+    res_data.synopsis as synopsis,
+    res_data.classify as classify,
+    res_data.cover as cover,
+    res_data.order_by as orderBy,
+    res_data.read_num as readNum
+    from res_buy left join res_data on res_buy.book_id = res_data.id
+    where res_buy.user_id = #{userId} and res_buy.state != 0
+  </select>
+
+  <resultMap id="resultBuy" type="com.xiaomy.book_city.entity.Buy">
+    <result column="buyNum" property="buyNum"></result>
+    <result column="amount" property="amount"></result>
+    <collection property="books" ofType="com.xiaomy.book_city.entity.Book">
+      <result column="id" property="id"/>
+      <result column="bookname" property="bookname"/>
+      <result column="author" property="bookname"/>
+      <result column="createtime" property="createtime"/>
+      <result column="synopsis" property="synopsis"/>
+      <result column="classify" property="classify"/>
+      <result column="cover" property="cover"/>
+      <result column="orderBy" property="orderBy"/>
+      <result column="readNum" property="readNum"/>
+    </collection>
+  </resultMap>
+
+  <select id="queryBrowse" resultType="com.xiaomy.book_city.entity.Book">
+    select res_data.* from browse left join res_data on browse.book_id = res_data.id
+    where browse.user_id = #{userId}
+  </select>
+
+  <select id="queryCollect" resultType="com.xiaomy.book_city.entity.portion.Collect">
+    select collect.creat_time as collectTime,res_data.* from collect left join res_data on collect.book_id = res_data.id
+    where collect.user_id = #{userId}
+  </select>
 </mapper>
