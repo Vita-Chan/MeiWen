@@ -1,6 +1,6 @@
-package com.xiaomy.book_city.entity.portion;
+package com.xiaomy.book_city.app.entity.portion;
 
-import com.xiaomy.book_city.entity.Book;
+import com.xiaomy.book_city.app.entity.Book;
 import java.util.Date;
 
 public class Collect extends Book {

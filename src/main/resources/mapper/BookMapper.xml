@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xiaomy.book_city.mapper.BookMapper">
-  <select id="queryBook" resultType="com.xiaomy.book_city.entity.Book">
+<mapper namespace="com.xiaomy.book_city.app.mapper.BookMapper">
+  <select id="queryBook" resultType="com.xiaomy.book_city.app.entity.Book">
     select * from res_data
   </select>
 
@@ -10,7 +10,7 @@
     select case when count(1)>0 then 1 else 0 end from res_buy where user_id = #{userId} AND book_id = #{bookId}
   </select>
 
-  <select id="queryComment" resultType="com.xiaomy.book_city.entity.Comment">
+  <select id="queryComment" resultType="com.xiaomy.book_city.app.entity.Comment">
     select * from comment where book_id = #{bookId}
   </select>
 </mapper>

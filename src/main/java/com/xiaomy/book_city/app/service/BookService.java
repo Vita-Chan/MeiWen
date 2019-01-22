@@ -1,7 +1,7 @@
-package com.xiaomy.book_city.service;
+package com.xiaomy.book_city.app.service;
 
-import com.xiaomy.book_city.entity.Book;
-import com.xiaomy.book_city.entity.Comment;
+import com.xiaomy.book_city.app.entity.Book;
+import com.xiaomy.book_city.app.entity.Comment;
 import java.util.List;
 
 public interface BookService {

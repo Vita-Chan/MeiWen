@@ -1,12 +1,13 @@
-package com.xiaomy.book_city.entity;
+package com.xiaomy.book_city.app.entity.vo;
 
+import com.xiaomy.book_city.app.entity.Book;
 import java.util.List;
 
 /**
  * 消费记录表
  * date: 2019/1/20
  */
-public class Buy {
+public class BuyVo {
   private int amount;
 
   private int buyNum;

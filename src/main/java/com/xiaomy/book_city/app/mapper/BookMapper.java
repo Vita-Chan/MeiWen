@@ -1,7 +1,7 @@
-package com.xiaomy.book_city.mapper;
+package com.xiaomy.book_city.app.mapper;
 
-import com.xiaomy.book_city.entity.Book;
-import com.xiaomy.book_city.entity.Comment;
+import com.xiaomy.book_city.app.entity.Book;
+import com.xiaomy.book_city.app.entity.Comment;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

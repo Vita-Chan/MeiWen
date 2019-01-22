@@ -1,9 +1,9 @@
-package com.xiaomy.book_city.service.impl;
+package com.xiaomy.book_city.app.service.impl;
 
-import com.xiaomy.book_city.entity.Book;
-import com.xiaomy.book_city.entity.Comment;
-import com.xiaomy.book_city.mapper.BookMapper;
-import com.xiaomy.book_city.service.BookService;
+import com.xiaomy.book_city.app.entity.Book;
+import com.xiaomy.book_city.app.entity.Comment;
+import com.xiaomy.book_city.app.mapper.BookMapper;
+import com.xiaomy.book_city.app.service.BookService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

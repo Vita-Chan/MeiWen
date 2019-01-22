@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xiaomy.book_city.mapper.UserMapper">
-  <select id="findUserById" resultType="com.xiaomy.book_city.entity.User">
+<mapper namespace="com.xiaomy.book_city.app.mapper.UserMapper">
+  <select id="findUserById" resultType="com.xiaomy.book_city.app.entity.User">
     select * from sys_user where ID = #{id}
   </select>
 
@@ -37,10 +37,10 @@
     where res_buy.user_id = #{userId} and res_buy.state != 0
   </select>
 
-  <resultMap id="resultBuy" type="com.xiaomy.book_city.entity.Buy">
+  <resultMap id="resultBuy" type="com.xiaomy.book_city.app.entity.vo.BuyVo">
     <result column="buyNum" property="buyNum"></result>
     <result column="amount" property="amount"></result>
-    <collection property="books" ofType="com.xiaomy.book_city.entity.Book">
+    <collection property="books" ofType="com.xiaomy.book_city.app.entity.Book">
       <result column="id" property="id"/>
       <result column="bookname" property="bookname"/>
       <result column="author" property="bookname"/>
@@ -53,13 +53,48 @@
     </collection>
   </resultMap>
 
-  <select id="queryBrowse" resultType="com.xiaomy.book_city.entity.Book">
+  <select id="queryBrowse" resultType="com.xiaomy.book_city.app.entity.Book">
     select res_data.* from browse left join res_data on browse.book_id = res_data.id
     where browse.user_id = #{userId}
   </select>
 
-  <select id="queryCollect" resultType="com.xiaomy.book_city.entity.portion.Collect">
+  <select id="queryCollect" resultType="com.xiaomy.book_city.app.entity.portion.Collect">
     select collect.creat_time as collectTime,res_data.* from collect left join res_data on collect.book_id = res_data.id
     where collect.user_id = #{userId}
   </select>
+
+  <select id="removeBuy" resultType="java.lang.Integer">
+    update res_buy set state = ${@com.xiaomy.book_city.app.constant.StateType@REMOVED}
+    where user_id = #{userId} and id = #{buyId}
+  </select>
+
+  <insert id="addBuy">
+    insert into res_buy(
+      user_id,
+      book_id,
+      creat_time,
+      price
+    )values (
+      #{userId},
+      #{bookId},
+      #{creatTime},
+      #{price}
+    )
+  </insert>
+
+  <insert id="addBrowse">
+    insert into browse(
+      user_id,
+      book_id,
+      creat_time
+    )values (
+      #{userId},
+      #{bookId},
+      #{creatTime}
+    )
+  </insert>
+
+  <delete id="deleteBrowse">
+    delete from browse where id = #{browseId} and user_id = #{userId}
+  </delete>
 </mapper>

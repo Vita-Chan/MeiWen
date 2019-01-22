@@ -1,4 +1,4 @@
-package com.xiaomy.book_city.entity;
+package com.xiaomy.book_city.app.entity;
 
 import java.util.Date;
 

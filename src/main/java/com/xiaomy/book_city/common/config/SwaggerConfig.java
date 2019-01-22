@@ -1,4 +1,4 @@
-package com.xiaomy.book_city.config;
+package com.xiaomy.book_city.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
-package com.xiaomy.book_city.controller;
+package com.xiaomy.book_city.app.controller;
 
-import com.xiaomy.book_city.result.Result;
-import com.xiaomy.book_city.service.BookService;
+import com.xiaomy.book_city.common.result.Result;
+import com.xiaomy.book_city.app.service.BookService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

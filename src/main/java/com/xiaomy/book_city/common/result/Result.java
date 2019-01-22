@@ -1,4 +1,4 @@
-package com.xiaomy.book_city.result;
+package com.xiaomy.book_city.common.result;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
