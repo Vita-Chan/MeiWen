@@ -4,6 +4,7 @@ import com.xiaomy.book_city.app.entity.Book;
 import com.xiaomy.book_city.app.entity.Comment;
 import com.xiaomy.book_city.app.mapper.BookMapper;
 import com.xiaomy.book_city.app.service.BookService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,17 @@ public class BookServiceImpl implements BookService {
   @Override
   public List<Comment> queryComment(int bookId) {
     return bookMapper.queryComment(bookId);
+  }
+
+  @Override
+  public int addComment(Comment comment) {
+    comment.setCreatTime(new Date());
+    return bookMapper.addComment(comment);
+  }
+
+  @Override
+  public int removeComment(int commentId, int userId) {
+    return 0;
   }
 
 }

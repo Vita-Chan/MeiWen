@@ -1,6 +1,7 @@
 package com.xiaomy.book_city.app.entity.vo;
 
 import com.xiaomy.book_city.app.entity.Book;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 
 /**
@@ -8,8 +9,10 @@ import java.util.List;
  * date: 2019/1/20
  */
 public class BuyVo {
+  @ApiModelProperty("总数")
   private int amount;
 
+  @ApiModelProperty("总金额")
   private int buyNum;
 
   private List<Book> books;

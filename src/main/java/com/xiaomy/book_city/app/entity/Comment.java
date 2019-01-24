@@ -1,13 +1,20 @@
 package com.xiaomy.book_city.app.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 
 public class Comment {
+  @ApiModelProperty("评论id")
   private int id;
+  @ApiModelProperty("bookid")
   private int bookId;
+  @ApiModelProperty("状态")
   private int state;
+  @ApiModelProperty("用户id")
   private int userId;
+  @ApiModelProperty("创建时间")
   private Date creatTime;
+  @ApiModelProperty("品论内容")
   private String content;
 
   public int getId() {

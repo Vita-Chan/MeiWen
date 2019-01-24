@@ -13,4 +13,16 @@
   <select id="queryComment" resultType="com.xiaomy.book_city.app.entity.Comment">
     select * from comment where book_id = #{bookId}
   </select>
+
+  <insert id="addComment">
+    insert into comment(
+      book_id, user_id, creat_time, content
+    )values (
+      #{bookId},#{userId},#{creatTime},#{content}
+    )
+  </insert>
+
+  <update id="removeComment">
+    update comment set state = ${@com.xiaomy.book_city.app.constant.StateType@REMOVED} where user_id = #{userId} and id = #{bookId}
+  </update>
 </mapper>

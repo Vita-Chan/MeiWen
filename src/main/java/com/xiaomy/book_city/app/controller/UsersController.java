@@ -1,8 +1,11 @@
 package com.xiaomy.book_city.app.controller;
 
+import com.xiaomy.book_city.app.entity.Book;
 import com.xiaomy.book_city.app.entity.Browse;
 import com.xiaomy.book_city.app.entity.Buy;
-import com.xiaomy.book_city.app.entity.User;
+import com.xiaomy.book_city.app.entity.UserVo;
+import com.xiaomy.book_city.app.entity.portion.Collect;
+import com.xiaomy.book_city.app.entity.vo.BuyVo;
 import com.xiaomy.book_city.common.result.Result;
 import com.xiaomy.book_city.app.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -23,7 +26,7 @@ public class UsersController {
   @Autowired
   private UserService userService;
 
-  @ApiOperation("用户个人信息获取")
+  @ApiOperation(value = "用户个人信息获取",response = UserVo.class)
   @GetMapping("/{id}")
   public Result findUserById(@PathVariable("id")int id){
     return Result.data(userService.findUserById(id));
@@ -31,14 +34,14 @@ public class UsersController {
 
   @ApiOperation("个人用户编辑")
   @PutMapping("/{id}")
-  public Result updateUser(@RequestBody User user,@PathVariable("id")int id){
+  public Result updateUser(@RequestBody UserVo user,@PathVariable("id")int id){
     user.setId(id);
     return Result.of(userService.updateUser(user))
         .success("{个人用户编辑成功}")
         .fail("{个人用户编辑失败}");
   }
 
-  @ApiOperation("消费记录查询")
+  @ApiOperation(value = "消费记录查询",response = BuyVo.class)
   @GetMapping("/buy/{userId}")
   public Result queryBuy(@PathVariable("userId") int userId){
     return Result.data(userService.queryBuys(userId));
@@ -60,7 +63,7 @@ public class UsersController {
         .fail("{添加消费记录失败}");
   }
 
-  @ApiOperation("浏览历史查询")
+  @ApiOperation(value = "浏览历史查询",response = Book.class)
   @GetMapping("/browse/{userId}")
   public Result queryBrowse(@PathVariable("userId") int userId){
     return Result.data(userService.queryBrowse(userId));
@@ -82,10 +85,23 @@ public class UsersController {
         .fail("{删除浏览历史失败}");
   }
 
-  @ApiOperation("收藏列表查询")
+  @ApiOperation(value = "收藏列表查询",response = Collect.class)
   @GetMapping("/collect/{userId}")
   public Result queryCollect(@PathVariable("userId") int userId){
     return Result.data(userService.queryCollect(userId));
   }
 
+  @ApiOperation("添加收藏列表")
+  @PostMapping("/collect")
+  public Result addCollect(Collect collect){
+    return Result.of(userService.addCollect(collect))
+        .success("{添加收藏列表成功}")
+        .fail("{添加收藏列表失败}");
+  }
+
+  @ApiOperation("物理删除收藏列表")
+  @DeleteMapping("/collect/{collectId}")
+  public Result deleteCollect(@PathVariable("userId") int userId, @PathVariable("collectId") int collectId){
+    return null;
+  }
 }

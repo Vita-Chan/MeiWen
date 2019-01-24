@@ -4,14 +4,14 @@ import com.xiaomy.book_city.app.entity.Book;
 import com.xiaomy.book_city.app.entity.Browse;
 import com.xiaomy.book_city.app.entity.Buy;
 import com.xiaomy.book_city.app.entity.vo.BuyVo;
-import com.xiaomy.book_city.app.entity.User;
+import com.xiaomy.book_city.app.entity.UserVo;
 import com.xiaomy.book_city.app.entity.portion.Collect;
 import java.util.List;
 
 public interface UserService {
-  User findUserById(int id);
+  UserVo findUserById(int id);
 
-  int updateUser(User user);
+  int updateUser(UserVo userVo);
 
   BuyVo queryBuys(int id);
 
@@ -22,6 +22,8 @@ public interface UserService {
   int deleteBrowse(int userId, int buyId);
 
   List<Collect> queryCollect(int userId);
+
+  int addCollect(Collect collect);
 
   int removeBuy(int userId, int buyId);
 

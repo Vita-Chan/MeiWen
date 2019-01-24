@@ -16,4 +16,8 @@ public interface BookMapper {
 
   /**查看评论列表*/
   List<Comment> queryComment(@Param("bookId")int bookId);
+
+  int addComment(Comment comment);
+
+  int removeComment(@Param("userId") int userId,@Param("bookId") int bookId);
  }

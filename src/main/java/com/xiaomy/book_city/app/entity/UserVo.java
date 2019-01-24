@@ -1,17 +1,29 @@
 package com.xiaomy.book_city.app.entity;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 
-public class User {
+public class UserVo {
+  @ApiModelProperty("用户id")
   private int id;
+  @ApiModelProperty("住址")
   private String address;
+  @ApiModelProperty("创建时间")
   private Date createTime;
+  @ApiModelProperty("描述")
   private String description;
+  @ApiModelProperty("email")
   private String email;
+  @ApiModelProperty("用户锁定")
   private int locked;
+  @ApiModelProperty("用户昵称")
   private String nickName;
+  @ApiModelProperty("性别")
   private int sex;
+  @ApiModelProperty("手机号")
   private String telephone;
+  @ApiModelProperty("修改时间")
   private Date updateTime;
+  @ApiModelProperty("账号")
   private String userName;
 
   public int getId() {

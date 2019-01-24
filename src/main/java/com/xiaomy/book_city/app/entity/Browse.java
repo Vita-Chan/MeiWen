@@ -1,11 +1,17 @@
 package com.xiaomy.book_city.app.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import java.util.Date;
 
 public class Browse {
+  @ApiModelProperty("历史记录id")
   private int id;
+  @ApiModelProperty("书的id")
   private int bookId;
+  @ApiModelProperty("用户id")
   private int userId;
+  @ApiModelProperty("创建时间")
   private Date creatTime;
 
   public int getId() {

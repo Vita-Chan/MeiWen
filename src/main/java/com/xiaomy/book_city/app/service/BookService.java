@@ -11,4 +11,8 @@ public interface BookService {
   boolean isByBook(int userId,int bookId);
 
   List<Comment> queryComment(int bookId);
+
+  int addComment(Comment comment);
+
+  int removeComment(int commentId,int userId);
 }
