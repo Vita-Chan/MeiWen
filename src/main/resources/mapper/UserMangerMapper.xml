@@ -7,6 +7,10 @@
     where 1=1 <include refid="userQueryBuilder"/>
   </select>
 
+  <select id="findUserById" resultType="com.xiaomy.book_city.admin.entity.vo.UserVo">
+    select * from sys_user where id = #{userId}
+  </select>
+
   <update id="removeUser">
     update sys_user set delete_status = #{deleteTime},
     state = ${@com.xiaomy.book_city.admin.constant.AdminConstants@REMOVE}

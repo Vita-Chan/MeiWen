@@ -1,6 +1,6 @@
 package com.xiaomy.book_city.admin.controller;
 
-import com.xiaomy.book_city.admin.queryBuilder.UserQueryBuilder;
+import com.xiaomy.book_city.admin.builder.UserQueryBuilder;
 import com.xiaomy.book_city.admin.service.UserMangerService;
 import com.xiaomy.book_city.common.result.Result;
 import io.swagger.annotations.ApiOperation;
@@ -31,4 +31,11 @@ public class UserMangerController {
         .success("{删除成功}")
         .fail("{删除失败}");
   }
+
+  @ApiOperation("查询一个用户的信息")
+  @GetMapping("/{userId}/{operator}")
+  public Result findByUserId(@PathVariable("userId")int userId, @PathVariable("operator")int operator){
+    return Result.data(userMangerService.findUserById(userId));
+  }
+
 }
