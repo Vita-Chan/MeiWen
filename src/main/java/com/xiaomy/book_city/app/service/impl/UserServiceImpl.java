@@ -4,7 +4,7 @@ import com.xiaomy.book_city.app.entity.Book;
 import com.xiaomy.book_city.app.entity.Browse;
 import com.xiaomy.book_city.app.entity.Buy;
 import com.xiaomy.book_city.app.entity.vo.BuyVo;
-import com.xiaomy.book_city.app.entity.UserVo;
+import com.xiaomy.book_city.app.entity.vo.UserVo;
 import com.xiaomy.book_city.app.entity.portion.Collect;
 import com.xiaomy.book_city.app.mapper.UserMapper;
 import com.xiaomy.book_city.app.service.UserService;
@@ -69,5 +69,10 @@ public class UserServiceImpl implements UserService {
   @Override
   public int addBuy(Buy buy) {
     return userMapper.addBuy(buy);
+  }
+
+  @Override
+  public int deleteCollect(int userId, int collectId) {
+    return userMapper.deleteBrowse(userId,collectId);
   }
 }

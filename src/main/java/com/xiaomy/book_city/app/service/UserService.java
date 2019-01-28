@@ -4,7 +4,7 @@ import com.xiaomy.book_city.app.entity.Book;
 import com.xiaomy.book_city.app.entity.Browse;
 import com.xiaomy.book_city.app.entity.Buy;
 import com.xiaomy.book_city.app.entity.vo.BuyVo;
-import com.xiaomy.book_city.app.entity.UserVo;
+import com.xiaomy.book_city.app.entity.vo.UserVo;
 import com.xiaomy.book_city.app.entity.portion.Collect;
 import java.util.List;
 
@@ -29,4 +29,5 @@ public interface UserService {
 
   int addBuy(Buy buy);
 
+  int deleteCollect(int userId, int collectId);
 }

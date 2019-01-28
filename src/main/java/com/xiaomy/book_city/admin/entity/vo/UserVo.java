@@ -1,5 +1,7 @@
-package com.xiaomy.book_city.app.entity;
+package com.xiaomy.book_city.admin.entity.vo;
+
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import java.util.Date;
 
 public class UserVo {
@@ -25,6 +27,12 @@ public class UserVo {
   private Date updateTime;
   @ApiModelProperty("账号")
   private String userName;
+
+  // -------------------------------------- 冗余字段 -----------------------------------
+  @ApiModelProperty("所属等级")
+  private String grade;
+  // -------------------------------------- 冗余字段 -----------------------------------
+
 
   public int getId() {
     return id;
@@ -112,5 +120,13 @@ public class UserVo {
 
   public void setUserName(String userName) {
     this.userName = userName;
+  }
+
+  public String getGrade() {
+    return grade;
+  }
+
+  public void setGrade(String grade) {
+    this.grade = grade;
   }
 }

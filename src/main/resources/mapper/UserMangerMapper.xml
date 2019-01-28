@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaomy.book_city.admin.mapper.UserMangerMapper">
+  <select id="queryUserVo" resultType="com.xiaomy.book_city.admin.entity.vo.UserVo">
+    select sys_user.*, sys_role.name as "grade" from sys_user left join sys_role on sys_user.level = sys_role.id
+    where 1=1 <include refid="userQueryBuilder"/>
+  </select>
+
+  <update id="removeUser">
+    update sys_user set delete_status = #{deleteTime},
+    state = ${@com.xiaomy.book_city.admin.constant.AdminConstants@REMOVE}
+    where id = #{userId}
+  </update>
+
+  <sql id="userQueryBuilder">
+    <if test="!grade.isEmpty()">
+      AND sys_user.level IN
+      <foreach collection="grade" item="item" index="index" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    <if test="createStart != null">
+      <![CDATA[and sys_user.create_time >= #{createStart}]]>
+    </if>
+    <if test="createEnd != null">
+      <![CDATA[and sys_user.create_time < #{createEnd}]]>
+    </if>
+      and sys_user.state = #{state}
+  </sql>
+</mapper>

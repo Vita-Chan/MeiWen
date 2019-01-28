@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xiaomy.book_city.app.mapper.UserMapper">
-  <select id="findUserById" resultType="com.xiaomy.book_city.app.entity.UserVo">
+  <select id="findUserById" resultType="com.xiaomy.book_city.app.entity.vo.UserVo">
     select * from sys_user where ID = #{id}
   </select>
 
@@ -110,4 +110,7 @@
     )
   </insert>
 
+  <delete id="removeCollect">
+    delete from collect where user_id = #{userId} and id = #{collectId}
+  </delete>
 </mapper>

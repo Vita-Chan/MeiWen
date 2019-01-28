@@ -3,7 +3,7 @@ package com.xiaomy.book_city.app.controller;
 import com.xiaomy.book_city.app.entity.Book;
 import com.xiaomy.book_city.app.entity.Browse;
 import com.xiaomy.book_city.app.entity.Buy;
-import com.xiaomy.book_city.app.entity.UserVo;
+import com.xiaomy.book_city.app.entity.vo.UserVo;
 import com.xiaomy.book_city.app.entity.portion.Collect;
 import com.xiaomy.book_city.app.entity.vo.BuyVo;
 import com.xiaomy.book_city.common.result.Result;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/app/users")
 public class UsersController {
 
   @Autowired
@@ -100,8 +100,10 @@ public class UsersController {
   }
 
   @ApiOperation("物理删除收藏列表")
-  @DeleteMapping("/collect/{collectId}")
+  @DeleteMapping("/collect/{userId}/{collectId}")
   public Result deleteCollect(@PathVariable("userId") int userId, @PathVariable("collectId") int collectId){
-    return null;
+    return Result.of(userService.deleteCollect(userId,collectId))
+        .success("{删除收藏成功}")
+        .fail("删除收藏失败");
   }
 }
