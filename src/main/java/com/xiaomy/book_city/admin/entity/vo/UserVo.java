@@ -31,6 +31,9 @@ public class UserVo {
   // -------------------------------------- 冗余字段 -----------------------------------
   @ApiModelProperty("所属等级: 1-超级管理员 2-普通管理员 3-作者 4-读者")
   private String grade;
+
+  @ApiModelProperty(value = "操作人的id", hidden = true)
+  private int operator;
   // -------------------------------------- 冗余字段 -----------------------------------
 
 
@@ -128,5 +131,13 @@ public class UserVo {
 
   public void setGrade(String grade) {
     this.grade = grade;
+  }
+
+  public int getOperator() {
+    return operator;
+  }
+
+  public void setOperator(int operator) {
+    this.operator = operator;
   }
 }

@@ -58,7 +58,7 @@ public class Result extends LinkedHashMap<String, Object> {
 
   public Result fail(String message) {
     if (!this.successful) {
-      throw new ConfCenterException(-1,message,false);
+      throw new ConfCenterException(message);
     }
     return this;
   }

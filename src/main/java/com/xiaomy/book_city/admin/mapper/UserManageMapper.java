@@ -8,10 +8,12 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
-public interface UserMangerMapper {
+public interface UserManageMapper {
   List<UserVo> queryUserVo(UserQueryBuilder userQueryBuilder);
 
   int removeUser(@Param("userId")int userId, @Param("deleteTime")Date deleteTime);
 
   UserVo findUserById(@Param("userId")int userId);
+
+  int updateUser(UserVo userVo);
 }

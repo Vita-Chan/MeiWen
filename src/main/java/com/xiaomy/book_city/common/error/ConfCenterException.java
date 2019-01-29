@@ -15,10 +15,8 @@ public class ConfCenterException extends RuntimeException {
   /**
    *  定义异常信息
    */
-  public ConfCenterException(int code,String errMsg,boolean status) {
+  public ConfCenterException(String errMsg) {
     super(errMsg);
-    this.code = code;
-    this.status = status;
   }
 
   /**

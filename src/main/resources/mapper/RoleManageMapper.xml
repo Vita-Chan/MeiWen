@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaomy.book_city.admin.mapper.RoleManageMapper">
+  <select id="queryRole" resultMap="roleMapper">
+    select sys_role.id as roleId,
+    sys_role.name as roleName,
+    sys_role.create_time as roleCreateTime,
+    sys_role.description as roleDescription,
+    sys_menu.id as menuId,
+    sys_menu.name as menuName,
+    sys_menu.description as menuDescription,
+    sys_role.create_time as menuCreateTime
+    from sys_role left join res_role_resource on sys_role.id = res_role_resource.role_id
+    left join sys_menu on  res_role_resource.menu_id = sys_menu.id
+    where 1=1 <include refid="roleQueryBuilder"/>
+  </select>
+
+  <resultMap id="roleMapper" type="com.xiaomy.book_city.admin.entity.Role">
+    <result column="roleId" property="id"/>
+    <result column="roleName" property="name"/>
+    <result column="roleDescription" property="description"/>
+    <result column="roleCreateTime" property="createTime"/>
+    <collection property="menus" ofType="com.xiaomy.book_city.admin.entity.Menu">
+      <result column="menuId" property="id"/>
+      <result column="menuCreateTime" property="createTime"/>
+      <result column="menuDescription" property="description"/>
+      <result column="menuName" property="name"/>
+    </collection>
+  </resultMap>
+
+  <sql id="roleQueryBuilder">
+    <if test="name != null">
+      and sys_role.name LIKE '%'||#{name}||'%'
+    </if>
+    <if test="startTime != null">
+      and <![CDATA[sys_role.create_time >= #{startTime}]]>
+    </if>
+    <if test="endTime != null">
+      and <![CDATA[sys_role.create_time < #{endTime}]]>
+    </if>
+  </sql>
+
+  <delete id="deleteRoleById">
+    delete from sys_role where id = #{roleId}
+  </delete>
+  <delete id="deleteRoleResourceByRoleId">
+    delete from res_role_resource where role_id = #{roleId}
+  </delete>
+
+  <update id="updateRole">
+    update sys_role set
+    <if test="name != null">name = #{name},</if>
+    <if test="description != null">description = #{description},</if>
+    <if test="updateTime != null">update_Time = #{updateTime}</if>
+    where id = #{id}
+  </update>
+
+  <insert id="addRoleResource">
+    insert into res_role_resource(
+      role_id,
+      menu_id
+    )values
+    <foreach collection="menus" item="item" separator=",">
+      (#{roleId},#{item})
+    </foreach>
+  </insert>
+
+  <insert id="addRole">
+    insert into sys_role (
+      create_time,
+      description,
+      name,
+    )values (
+      #{createTime},
+      #{description},
+      #{name}
+    )
+  </insert>
+
+  <select id="isRole" resultType="java.lang.Boolean">
+    select case when count(1)>0 then 1 else 0 end
+    from sys_role where sys_role.name = #{roleName}
+  </select>
+</mapper>

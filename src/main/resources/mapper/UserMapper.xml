@@ -59,7 +59,7 @@
   </select>
 
   <select id="queryCollect" resultType="com.xiaomy.book_city.app.entity.portion.Collect">
-    select collect.creat_time as collectTime,res_data.* from collect left join res_data on collect.book_id = res_data.id
+    select collect.create_time as collectTime,res_data.* from collect left join res_data on collect.book_id = res_data.id
     where collect.user_id = #{userId}
   </select>
 
@@ -102,7 +102,7 @@
     insert into collect(
       book_id,
       user_id,
-      creat_time
+      create_time
     )values (
       #{id},
       #{userId},

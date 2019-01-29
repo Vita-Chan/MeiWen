@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaomy.book_city.admin.mapper.ItemManageMapper">
+  <select id="queryItems" resultType="com.xiaomy.book_city.admin.entity.Item">
+    select res_item.*,res_data.bookname as bookName from res_item left join res_data on res_item.bookid = res_data.id
+    where 1=1 <include refid="itemQueryBuilder"/>
+  </select>
+
+  <sql id="itemQueryBuilder">
+    <if test="bookId > 0">
+      and res_data.id = #{bookId}
+    </if>
+    <if test="titleName != null">
+      and res_item.title_name like '%'||#{titleName}||'%'
+    </if>
+    <if test="num > 0">
+      and res_item.num = #{num}
+    </if>
+  </sql>
+
+  <delete id="deleteItemById">
+    delete from res_item where id = #{itemId}
+  </delete>
+
+  <update id="updateItem">
+    update res_item
+    <set>
+      <if test="bookid > 0">bookid = #{bookid},</if>
+      <if test="titleName != null">title_name = #{titleName},</if>
+      <if test="content != null">content = #{content},</if>
+      free_read = freeRead,
+      <if test="textImg">text_img = #{textImg}</if>
+    </set>
+    where id = #{id}
+  </update>
+
+  <insert id="addItem">
+    insert into res_item(
+      bookid,
+      num,
+      createtime,
+      title_name,
+      content,
+      free_read,
+      text_img,
+    )values (
+      #{bookid},
+      #{num},
+      #{createtime},
+      #{titleName},
+      #{content},
+      #{freeRead},
+      #{textImg}
+    )
+  </insert>
+
+  <select id="isItem" resultType="java.lang.Boolean">
+    select case when count(1)>0 then 1 else 0 end
+    from res_item
+    where ((res_item.bookid = #{bookId} and res_item.num = #{num})
+    or (res_item.bookid = #{bookId} and res_item.title_name = #{titleName}))
+  </select>
+</mapper>

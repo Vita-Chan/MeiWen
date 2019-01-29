@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaomy.book_city.admin.mapper.CommentManageMapper">
+  <select id="queryComments" resultType="com.xiaomy.book_city.admin.entity.Comment">
+    select * from comment where 1=1 <if test="state > -1">and state = #{state}</if>
+  </select>
+
+  <update id="updateComment">
+    update comment set
+    state = #{state} where id = #{commentId}
+  </update>
+</mapper>

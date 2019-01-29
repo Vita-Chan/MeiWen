@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaomy.book_city.admin.mapper.CollectManageMapper">
+  <select id="queryCollects" resultType="com.xiaomy.book_city.admin.entity.Collect">
+    select collect.*,sys_user.nick_name as userName, res_data.bookname as bookName
+    from collect left join sys_user on collect.user_id = sys_user.id
+    left join res_data on collect.book_id = book_id
+  </select>
+
+  <delete id="deleteCollectById">
+    delete from collect where id = #{collectId}
+  </delete>
+</mapper>

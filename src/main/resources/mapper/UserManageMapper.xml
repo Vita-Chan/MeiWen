@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xiaomy.book_city.admin.mapper.UserMangerMapper">
+<mapper namespace="com.xiaomy.book_city.admin.mapper.UserManageMapper">
   <select id="queryUserVo" resultType="com.xiaomy.book_city.admin.entity.vo.UserVo">
     select sys_user.*, sys_role.name as "grade" from sys_user left join sys_role on sys_user.level = sys_role.id
     where 1=1 <include refid="userQueryBuilder"/>
@@ -15,6 +15,21 @@
     update sys_user set delete_status = #{deleteTime},
     state = ${@com.xiaomy.book_city.admin.constant.AdminConstants@REMOVE}
     where id = #{userId}
+  </update>
+
+  <update id="updateUser">
+    update sys_user
+    <set>
+      <if test="address != null">address = address,</if>
+      <if test="description != null">description = description,</if>
+      <if test="email != null">email = email,</if>
+      <if test="nickName != null">nick_name = nickName,</if>
+      <if test="sex > 0">sex = sex,</if>
+      <if test="telephone != null">telephone = telephone,</if>
+      <if test="updateTime != null">update_time = updateTime</if>
+      <if test="operator > 0">level = #{operator}</if>
+    </set>
+    where id = #{id}
   </update>
 
   <sql id="userQueryBuilder">

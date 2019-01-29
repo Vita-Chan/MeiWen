@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.xiaomy.book_city.admin.entity.vo.UserVo;
 import com.xiaomy.book_city.admin.builder.UserQueryBuilder;
 
-public interface UserMangerService {
+public interface UserManageService {
   PageInfo<UserVo> queryUsers(UserQueryBuilder userQueryBuilde);
 
   int removeUser(int userId,int operator);

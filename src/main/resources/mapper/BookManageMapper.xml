@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaomy.book_city.admin.mapper.BookManageMapper">
+  <select id="queryBooks" resultType="com.xiaomy.book_city.app.entity.Book">
+    select * from res_data where 1=1
+    <if test="bookname != null">and name like '%'||#{bookname}||'%'</if>
+    and state != ${@com.xiaomy.book_city.app.constant.StateType@REMOVE}
+  </select>
+
+  <update id="removeBookById">
+    update res_data set
+    state = ${@com.xiaomy.book_city.app.constant.StateType@REMOVE}
+    where id = #{bookId}
+  </update>
+
+  <update id="updateBook">
+    update res_data
+    <set>
+      <if test="bookname">bookname = #{bookname},</if>
+      <if test="author > 0">author = #{author},</if>
+      <if test="updatetime != null">updatetime = #{updatetime},</if>
+      <if test="synopsis != null">synopsis = #{synopsis},</if>
+      <if test="classify > 0">classify = #{classify},</if>
+      <if test="cover != null">cover = #{cover},</if>
+      <if test="price != null">price = #{price}</if>
+    </set>
+    where id = #{id}
+  </update>
+</mapper>
