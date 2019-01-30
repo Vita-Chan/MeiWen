@@ -35,5 +35,10 @@ public class BookManageServiceImpl implements BookManageService {
     return bookManageMapper.updateBook(book);
   }
 
+  @Override
+  public int addBook(Book book) {
+    return 0;
+  }
+
 
 }

@@ -5,7 +5,9 @@
   <select id="queryBooks" resultType="com.xiaomy.book_city.app.entity.Book">
     select * from res_data where 1=1
     <if test="bookname != null">and name like '%'||#{bookname}||'%'</if>
+    <if test="userId > 0">and author = #{userId}</if>
     and state != ${@com.xiaomy.book_city.app.constant.StateType@REMOVE}
+    order by order_by
   </select>
 
   <update id="removeBookById">
@@ -27,4 +29,26 @@
     </set>
     where id = #{id}
   </update>
+
+  <insert id="addBook">
+    insert into res_data(
+      bookname,
+      author,
+      createtime,
+      synopsis,
+      classify,
+      price,
+      cover,
+      order_by
+    )values (
+      #{bookname},
+      #{author},
+      #{createtime},
+      #{synopsis},
+      #{classify},
+      #{price},
+      #{cover},
+      #{orderBy}
+    )
+  </insert>
 </mapper>

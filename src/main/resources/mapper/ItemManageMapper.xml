@@ -8,14 +8,15 @@
   </select>
 
   <sql id="itemQueryBuilder">
-    <if test="bookId > 0">
-      and res_data.id = #{bookId}
-    </if>
     <if test="titleName != null">
       and res_item.title_name like '%'||#{titleName}||'%'
     </if>
     <if test="num > 0">
       and res_item.num = #{num}
+    </if>
+    <if test="bookId > 0">
+      and res_data.id = #{bookId}
+      order by num
     </if>
   </sql>
 

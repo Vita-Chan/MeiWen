@@ -14,4 +14,6 @@ public interface BookManageMapper {
   int removeBookById(@Param("bookId") int bookId);
 
   int updateBook(Book book);
+
+  int addBook(Book book);
 }

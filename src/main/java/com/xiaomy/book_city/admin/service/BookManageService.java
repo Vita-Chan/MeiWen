@@ -10,4 +10,6 @@ public interface BookManageService {
   int removeBookById(int bookId, int operator);
 
   int updateBook(Book book);
+
+  int addBook(Book book);
 }
