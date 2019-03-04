@@ -39,6 +39,7 @@
     <if test="endTime != null">
       and <![CDATA[sys_role.create_time < #{endTime}]]>
     </if>
+      and sys_role.name != "administrator"
   </sql>
 
   <delete id="deleteRoleById">
@@ -81,5 +82,9 @@
   <select id="isRole" resultType="java.lang.Boolean">
     select case when count(1)>0 then 1 else 0 end
     from sys_role where sys_role.name = #{roleName}
+  </select>
+
+  <select id="listRoles" resultType="com.xiaomy.book_city.admin.entity.part.RolePart">
+    select id,name from sys_role
   </select>
 </mapper>

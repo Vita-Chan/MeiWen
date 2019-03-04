@@ -7,5 +7,7 @@ import com.xiaomy.book_city.admin.entity.Comment;
 public interface CommentManageService {
   PageInfo<Comment> queryComments(CommentQueryBuilder commentQueryBuilder);
 
-  int updateComments(int commentId, int operator, int state);
+  int updateComments(int commentId, int state);
+
+  int removeComments(Integer[] commentId);
 }

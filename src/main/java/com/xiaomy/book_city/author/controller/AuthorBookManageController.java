@@ -47,9 +47,9 @@ public class AuthorBookManageController {
   }
 
   @ApiOperation("删除图书 - 逻辑删除")
-  @DeleteMapping("/{bookId}/{operator}")
-  public Result removeBookById(@PathVariable("bookId")int bookId, @PathVariable("operator")int operator){
-    return Result.of(bookManageService.removeBookById(bookId,operator))
+  @DeleteMapping("/{bookId}")
+  public Result removeBookById(@PathVariable("bookId")Integer[] bookId){
+    return Result.of(bookManageService.removeBookById(bookId))
         .success("删除图书成功")
         .fail("删除图书失败");
   }
@@ -57,7 +57,6 @@ public class AuthorBookManageController {
   @ApiOperation("添加图书")
   @PostMapping("/{operator}")
   public Result addBook(@PathVariable("operator")int operator, Book book){
-    book.setAuthor(operator);
     return Result.of(bookManageService.addBook(book))
         .success("添加图书成功")
         .fail("添加图书失败");

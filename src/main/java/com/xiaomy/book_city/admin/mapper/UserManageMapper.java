@@ -15,5 +15,9 @@ public interface UserManageMapper {
 
   UserVo findUserById(@Param("userId")int userId);
 
+  int removeUsers(@Param("users")Integer[] users,@Param("deleteTime")Date deleteTime);
+
   int updateUser(UserVo userVo);
+
+  int addUser(UserVo userVo);
 }

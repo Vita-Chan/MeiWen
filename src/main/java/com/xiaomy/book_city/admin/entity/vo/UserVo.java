@@ -1,8 +1,11 @@
 package com.xiaomy.book_city.admin.entity.vo;
 
+import com.xiaomy.book_city.admin.entity.Role;
+import com.xiaomy.book_city.admin.entity.part.RolePart;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import java.util.Date;
+import java.util.List;
 
 public class UserVo {
   @ApiModelProperty("用户id")
@@ -27,13 +30,16 @@ public class UserVo {
   private Date updateTime;
   @ApiModelProperty("账号")
   private String userName;
+  @ApiModelProperty("密码")
+  private String password;
+  @ApiModelProperty("等级")
+  private String level;
 
   // -------------------------------------- 冗余字段 -----------------------------------
   @ApiModelProperty("所属等级: 1-超级管理员 2-普通管理员 3-作者 4-读者")
   private String grade;
 
-  @ApiModelProperty(value = "操作人的id", hidden = true)
-  private int operator;
+  private int state = 1;
   // -------------------------------------- 冗余字段 -----------------------------------
 
 
@@ -133,11 +139,27 @@ public class UserVo {
     this.grade = grade;
   }
 
-  public int getOperator() {
-    return operator;
+  public String getPassword() {
+    return password;
   }
 
-  public void setOperator(int operator) {
-    this.operator = operator;
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public int getState() {
+    return state;
+  }
+
+  public void setState(int state) {
+    this.state = state;
+  }
+
+  public String getLevel() {
+    return level;
+  }
+
+  public void setLevel(String level) {
+    this.level = level;
   }
 }

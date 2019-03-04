@@ -1,5 +1,6 @@
 package com.xiaomy.book_city.admin.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.xiaomy.book_city.admin.builder.ItemQueryBuilder;
 import com.xiaomy.book_city.admin.entity.Item;
 import com.xiaomy.book_city.admin.service.ItemManageService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,13 +25,14 @@ public class ItemManageController {
 
   @ApiOperation("查询所有章节")
   @GetMapping
-  public Result queryItem(ItemQueryBuilder itemQueryBuilder){
-    return Result.data(itemManageService.queryItems(itemQueryBuilder));
+  public PageInfo<Item> queryItem(ItemQueryBuilder itemQueryBuilder){
+    return itemManageService.queryItems(itemQueryBuilder);
   }
 
   @ApiOperation("添加章节")
-  @PostMapping("/{operator}")
-  public Result addItem(Item item,@PathVariable("operator")int operator){
+  @PostMapping()
+  public Result addItem(@RequestBody Item item){
+    System.out.println(item.toString());
     return Result.of(itemManageService.addItem(item))
         .success("添加章节成功")
         .fail("添加章节失败");

@@ -2,6 +2,7 @@ package com.xiaomy.book_city.admin.mapper;
 
 import com.xiaomy.book_city.admin.builder.RoleQueryBuilder;
 import com.xiaomy.book_city.admin.entity.Role;
+import com.xiaomy.book_city.admin.entity.part.RolePart;
 import java.util.List;
 import java.util.Set;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,4 +23,6 @@ public interface RoleManageMapper {
   int addRole(Role role);
 
   boolean isRole(@Param("roleName") String roleName);
+
+  List<RolePart> listRoles();
 }

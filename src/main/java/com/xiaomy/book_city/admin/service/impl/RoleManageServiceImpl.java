@@ -22,10 +22,9 @@ public class RoleManageServiceImpl implements RoleManageService {
   private RoleManageMapper roleManageMapper;
 
   @Override
-  public PageInfo<Role> queryRole(RoleQueryBuilder roleQueryBuilder) {
-    PageHelper.startPage(roleQueryBuilder.getPageNum(),roleQueryBuilder.getPageSize());
+  public List<Role> queryRole(RoleQueryBuilder roleQueryBuilder) {
     List<Role> roles = roleManageMapper.queryRole(roleQueryBuilder);
-    return new PageInfo<Role>(roles);
+    return roles;
   }
 
   @Transactional

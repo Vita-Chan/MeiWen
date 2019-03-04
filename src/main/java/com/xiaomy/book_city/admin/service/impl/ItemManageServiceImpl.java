@@ -5,9 +5,11 @@ import com.github.pagehelper.PageInfo;
 import com.xiaomy.book_city.admin.builder.ItemQueryBuilder;
 import com.xiaomy.book_city.admin.entity.Item;
 import com.xiaomy.book_city.admin.error.AdminError;
+import com.xiaomy.book_city.admin.mapper.BookManageMapper;
 import com.xiaomy.book_city.admin.mapper.ItemManageMapper;
 import com.xiaomy.book_city.admin.service.ItemManageService;
 import com.xiaomy.book_city.common.error.ConfCenterException;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class ItemManageServiceImpl implements ItemManageService {
 
   @Autowired
   private ItemManageMapper itemManageMapper;
+
+  @Autowired
+  private BookManageMapper bookManageMapper;
 
   @Override
   public PageInfo<Item> queryItems(ItemQueryBuilder itemQueryBuilder) {
@@ -40,9 +45,13 @@ public class ItemManageServiceImpl implements ItemManageService {
 
   @Override
   public int addItem(Item item) {
+    int bookid = bookManageMapper.findBookByBookName(item.getBookName());
+    System.out.println(bookid);
+    item.setBookid(bookid);
     if(itemManageMapper.isItem(item.getNum(),item.getBookid(),item.getTitleName())){
       throw new ConfCenterException(AdminError.THE_ITEM_ALREADY_EXIST);
     }
-    return itemManageMapper.updateItem(item);
+    item.setCreatetime(new Date());
+    return itemManageMapper.addItem(item);
   }
 }

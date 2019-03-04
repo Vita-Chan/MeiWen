@@ -3,11 +3,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xiaomy.book_city.admin.mapper.CommentManageMapper">
   <select id="queryComments" resultType="com.xiaomy.book_city.admin.entity.Comment">
-    select * from comment where 1=1 <if test="state > -1">and state = #{state}</if>
+    select comment.*,res_data.bookname as bookName,sys_user.nickname as userName from comment
+    left join res_data on comment.book_id = res_data.id
+    left join sys_user on comment.user_id = sys_user.id
+    where 1=1 and comment.state != 0
   </select>
 
   <update id="updateComment">
     update comment set
     state = #{state} where id = #{commentId}
+  </update>
+
+  <update id="removeComment">
+      update comment set
+        state = ${@com.xiaomy.book_city.admin.constant.AdminConstants@REMOVE}
+      where id in
+    <foreach collection="commentId" index="index" item="item"
+      separator="," open="(" close=")">
+      #{item}
+    </foreach>
   </update>
 </mapper>

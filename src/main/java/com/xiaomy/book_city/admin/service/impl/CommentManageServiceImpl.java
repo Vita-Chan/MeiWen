@@ -24,7 +24,12 @@ public class CommentManageServiceImpl implements CommentManageService {
   }
 
   @Override
-  public int updateComments(int commentId, int operator, int state) {
+  public int updateComments(int commentId, int state) {
     return commentManageMapper.updateComment(commentId,state);
+  }
+
+  @Override
+  public int removeComments(Integer[] commentId) {
+    return commentManageMapper.removeComment(commentId);
   }
 }

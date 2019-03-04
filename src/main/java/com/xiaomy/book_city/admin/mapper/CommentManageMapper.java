@@ -11,4 +11,6 @@ public interface CommentManageMapper {
   List<Comment> queryComments(CommentQueryBuilder commentQueryBuilder);
 
   int updateComment(@Param("commentId")int commentId, @Param("state")int state);
+
+  int removeComment(@Param("commentId")Integer[] commentId);
 }

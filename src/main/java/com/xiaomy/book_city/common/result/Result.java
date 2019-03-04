@@ -23,7 +23,6 @@ public class Result extends LinkedHashMap<String, Object> {
     return (new Result()).addAttribute("data", data);
   }
 
-
   public static Result of(Number success){
     return new Result().isStatus(success.intValue());
   }

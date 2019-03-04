@@ -10,8 +10,8 @@ public class Book {
   @ApiModelProperty("图书名称")
   private String bookname;
 
-  @ApiModelProperty("作者外键id")
-  private int author; //作者id 外键
+  @ApiModelProperty("作者名称")
+  private String author; //作者名称
 
   @ApiModelProperty("创建时间")
   private Date createtime;
@@ -40,6 +40,7 @@ public class Book {
   @ApiModelProperty("状态")
   private int state;
 
+
   public int getId() {
     return id;
   }
@@ -56,11 +57,11 @@ public class Book {
     this.bookname = bookname;
   }
 
-  public int getAuthor() {
+  public String getAuthor() {
     return author;
   }
 
-  public void setAuthor(int author) {
+  public void setAuthor(String author) {
     this.author = author;
   }
 
@@ -134,5 +135,23 @@ public class Book {
 
   public void setReadNum(int readNum) {
     this.readNum = readNum;
+  }
+
+  @Override
+  public String toString() {
+    return "Book{" +
+        "id=" + id +
+        ", bookname='" + bookname + '\'' +
+        ", author='" + author + '\'' +
+        ", createtime=" + createtime +
+        ", updatetime=" + updatetime +
+        ", synopsis='" + synopsis + '\'' +
+        ", classify=" + classify +
+        ", price='" + price + '\'' +
+        ", cover='" + cover + '\'' +
+        ", orderBy=" + orderBy +
+        ", readNum=" + readNum +
+        ", state=" + state +
+        '}';
   }
 }

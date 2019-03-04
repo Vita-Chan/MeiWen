@@ -3,10 +3,11 @@ package com.xiaomy.book_city.admin.service;
 import com.github.pagehelper.PageInfo;
 import com.xiaomy.book_city.admin.builder.RoleQueryBuilder;
 import com.xiaomy.book_city.admin.entity.Role;
+import java.util.List;
 
 public interface RoleManageService {
 
-  PageInfo<Role> queryRole(RoleQueryBuilder roleQueryBuilder);
+  List<Role> queryRole(RoleQueryBuilder roleQueryBuilder);
 
   int deleteRoleById(int roleId, int operator);
 

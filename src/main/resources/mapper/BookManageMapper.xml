@@ -7,20 +7,24 @@
     <if test="bookname != null">and name like '%'||#{bookname}||'%'</if>
     <if test="userId > 0">and author = #{userId}</if>
     and state != ${@com.xiaomy.book_city.app.constant.StateType@REMOVE}
-    order by order_by
+    order by id desc
   </select>
 
   <update id="removeBookById">
     update res_data set
     state = ${@com.xiaomy.book_city.app.constant.StateType@REMOVE}
-    where id = #{bookId}
+    where id in
+    <foreach collection="bookId" index="index" item="item"
+      separator="," open="(" close=")">
+      #{item}
+    </foreach>
   </update>
 
   <update id="updateBook">
     update res_data
     <set>
       <if test="bookname">bookname = #{bookname},</if>
-      <if test="author > 0">author = #{author},</if>
+      <if test="author != null">author = #{author},</if>
       <if test="updatetime != null">updatetime = #{updatetime},</if>
       <if test="synopsis != null">synopsis = #{synopsis},</if>
       <if test="classify > 0">classify = #{classify},</if>
@@ -51,4 +55,12 @@
       #{orderBy}
     )
   </insert>
+
+  <select id="BookClass" resultType="com.xiaomy.book_city.admin.entity.BookClass">
+    select * from data_class
+  </select>
+
+  <select id="findBookByBookName" resultType="java.lang.Integer">
+    select id from res_data where bookname = #{bookName}
+  </select>
 </mapper>

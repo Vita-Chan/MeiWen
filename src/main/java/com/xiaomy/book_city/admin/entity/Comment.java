@@ -22,6 +22,17 @@ public class Comment {
   @ApiModelProperty("评论内容")
   private String content;
 
+  // ---------------------- 冗余字段 --------------------------
+  @ApiModelProperty("图书名称")
+  private String bookName;
+
+  @ApiModelProperty("用户名")
+  private String userName;
+
+  @ApiModelProperty("审核结果-中文显示")
+  private String stateName;
+  // ---------------------- 冗余字段 --------------------------
+
   public int getId() {
     return id;
   }
@@ -44,6 +55,15 @@ public class Comment {
 
   public void setState(int state) {
     this.state = state;
+    if(state == 1){
+      this.stateName = "未审核";
+    }
+    if(state == 2){
+      this.stateName = "审核通过";
+    }
+    if(state == 3){
+      this.stateName = "未通过";
+    }
   }
 
   public int getUserId() {
@@ -68,5 +88,29 @@ public class Comment {
 
   public void setContent(String content) {
     this.content = content;
+  }
+
+  public String getBookName() {
+    return bookName;
+  }
+
+  public void setBookName(String bookName) {
+    this.bookName = bookName;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+  public String getStateName() {
+    return stateName;
+  }
+
+  public void setStateName(String stateName) {
+    this.stateName = stateName;
   }
 }

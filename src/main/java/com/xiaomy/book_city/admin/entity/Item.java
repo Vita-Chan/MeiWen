@@ -103,4 +103,19 @@ public class Item {
   public void setBookName(String bookName) {
     this.bookName = bookName;
   }
+
+  @Override
+  public String toString() {
+    return "Item{" +
+        "id=" + id +
+        ", bookid=" + bookid +
+        ", num=" + num +
+        ", createtime=" + createtime +
+        ", titleName='" + titleName + '\'' +
+        ", content='" + content + '\'' +
+        ", freeRead=" + freeRead +
+        ", textImg='" + textImg + '\'' +
+        ", bookName='" + bookName + '\'' +
+        '}';
+  }
 }

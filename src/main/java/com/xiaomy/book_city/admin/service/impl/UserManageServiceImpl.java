@@ -3,11 +3,13 @@ package com.xiaomy.book_city.admin.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xiaomy.book_city.admin.entity.vo.UserVo;
+import com.xiaomy.book_city.admin.mapper.RoleManageMapper;
 import com.xiaomy.book_city.admin.mapper.UserManageMapper;
 import com.xiaomy.book_city.admin.builder.UserQueryBuilder;
 import com.xiaomy.book_city.admin.service.UserManageService;
 import java.util.Date;
 import java.util.List;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ public class UserManageServiceImpl implements UserManageService {
   @Autowired
   private UserManageMapper userMangerMapper;
 
+  @Autowired
+  private RoleManageMapper roleManageMapper;
+
   @Override
   public PageInfo<UserVo> queryUsers(UserQueryBuilder userQueryBuilder) {
     PageHelper.startPage(userQueryBuilder.getPageNum(),userQueryBuilder.getPageSize());
@@ -25,8 +30,8 @@ public class UserManageServiceImpl implements UserManageService {
   }
 
   @Override
-  public int removeUser(int userId, int operator) {
-    return userMangerMapper.removeUser(userId,new Date());
+  public int removeUser(Integer[] users) {
+    return userMangerMapper.removeUsers(users,new Date());
   }
 
   @Override
@@ -39,4 +44,18 @@ public class UserManageServiceImpl implements UserManageService {
     userVo.setUpdateTime(new Date());
     return userMangerMapper.updateUser(userVo);
   }
+
+  @Override
+  public int addUser(UserVo userVo) {
+    userVo.setCreateTime(new Date());
+    return userMangerMapper.addUser(userVo);
+  }
+
+  @Override
+  public UserVo findUserAndRolesByUserId(int userId) {
+    UserVo userVo = userMangerMapper.findUserById(userId);
+    return userVo;
+  }
+
+
 }

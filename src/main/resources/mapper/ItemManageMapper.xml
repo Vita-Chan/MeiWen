@@ -44,7 +44,7 @@
       title_name,
       content,
       free_read,
-      text_img,
+      text_img
     )values (
       #{bookid},
       #{num},

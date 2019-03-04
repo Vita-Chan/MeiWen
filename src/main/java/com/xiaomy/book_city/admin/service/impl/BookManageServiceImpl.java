@@ -3,6 +3,7 @@ package com.xiaomy.book_city.admin.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xiaomy.book_city.admin.builder.BookQueryBuilder;
+import com.xiaomy.book_city.admin.entity.BookClass;
 import com.xiaomy.book_city.admin.mapper.BookManageMapper;
 import com.xiaomy.book_city.admin.service.BookManageService;
 import com.xiaomy.book_city.app.entity.Book;
@@ -25,7 +26,7 @@ public class BookManageServiceImpl implements BookManageService {
   }
 
   @Override
-  public int removeBookById(int bookId, int operator) {
+  public int removeBookById(Integer[] bookId) {
     return bookManageMapper.removeBookById(bookId);
   }
 
@@ -37,7 +38,13 @@ public class BookManageServiceImpl implements BookManageService {
 
   @Override
   public int addBook(Book book) {
-    return 0;
+    book.setCreatetime(new Date());
+    return bookManageMapper.addBook(book);
+  }
+
+  @Override
+  public List<BookClass> listBookClass() {
+    return bookManageMapper.BookClass();
   }
 
 
