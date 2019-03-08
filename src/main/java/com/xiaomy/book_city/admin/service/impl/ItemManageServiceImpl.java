@@ -39,7 +39,7 @@ public class ItemManageServiceImpl implements ItemManageService {
   }
 
   @Override
-  public int deleteItem(int itemId, int operator) {
+  public int deleteItem(Integer[] itemId) {
     return itemManageMapper.deleteItemById(itemId);
   }
 
@@ -53,5 +53,10 @@ public class ItemManageServiceImpl implements ItemManageService {
     }
     item.setCreatetime(new Date());
     return itemManageMapper.addItem(item);
+  }
+
+  @Override
+  public Item findItemById(int itemId) {
+    return itemManageMapper.findItemById(itemId);
   }
 }

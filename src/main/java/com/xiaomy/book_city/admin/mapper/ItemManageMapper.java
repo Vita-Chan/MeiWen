@@ -10,11 +10,13 @@ import org.apache.ibatis.annotations.Param;
 public interface ItemManageMapper {
   List<Item> queryItems(ItemQueryBuilder itemQueryBuilder);
 
-  int deleteItemById(@Param("itemId")int itemId);
+  int deleteItemById(@Param("itemId")Integer[] itemId);
 
   int updateItem(Item item);
 
   int addItem(Item item);
 
   boolean isItem(@Param("num") int num,@Param("bookId")int bookId,@Param("titleName")String titleName);
+
+  Item findItemById(@Param("itemId")int itemId);
 }

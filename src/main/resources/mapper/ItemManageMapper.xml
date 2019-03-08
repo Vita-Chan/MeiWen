@@ -21,7 +21,11 @@
   </sql>
 
   <delete id="deleteItemById">
-    delete from res_item where id = #{itemId}
+    delete from res_item where id in
+    <foreach collection="itemId" index="index" item="item"
+      separator="," open="(" close=")">
+      #{item}
+    </foreach>
   </delete>
 
   <update id="updateItem">
@@ -29,9 +33,7 @@
     <set>
       <if test="bookid > 0">bookid = #{bookid},</if>
       <if test="titleName != null">title_name = #{titleName},</if>
-      <if test="content != null">content = #{content},</if>
-      free_read = freeRead,
-      <if test="textImg">text_img = #{textImg}</if>
+      <if test="content != null">content = #{content}</if>
     </set>
     where id = #{id}
   </update>
@@ -61,5 +63,9 @@
     from res_item
     where ((res_item.bookid = #{bookId} and res_item.num = #{num})
     or (res_item.bookid = #{bookId} and res_item.title_name = #{titleName}))
+  </select>
+
+  <select id="findItemById" resultType="com.xiaomy.book_city.admin.entity.Item">
+    select * from res_item where id = #{itemId}
   </select>
 </mapper>

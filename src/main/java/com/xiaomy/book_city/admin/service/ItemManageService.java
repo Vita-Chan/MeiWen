@@ -9,7 +9,9 @@ public interface ItemManageService {
 
   int updateItem(Item item);
 
-  int deleteItem(int itemId, int operator);
+  int deleteItem(Integer[] itemId);
 
   int addItem(Item item);
+
+  Item findItemById(int itemId);
 }

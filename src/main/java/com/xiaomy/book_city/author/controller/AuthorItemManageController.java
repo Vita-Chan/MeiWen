@@ -46,9 +46,9 @@ public class AuthorItemManageController {
   }
 
   @ApiOperation("删除章节")
-  @DeleteMapping("/{itemId}/{operator}")
-  public Result deleteItemById(@PathVariable("itemId")int itemId,@PathVariable("operator")int operator){
-    return Result.of(itemManageService.deleteItem(itemId,operator))
+  @DeleteMapping("/{itemId}")
+  public Result deleteItemById(@PathVariable("itemId")Integer[] itemId){
+    return Result.of(itemManageService.deleteItem(itemId))
         .success("删除章节成功")
         .fail("删除章节失败");
   }

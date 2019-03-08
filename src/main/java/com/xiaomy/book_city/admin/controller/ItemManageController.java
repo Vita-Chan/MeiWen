@@ -1,5 +1,6 @@
 package com.xiaomy.book_city.admin.controller;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.github.pagehelper.PageInfo;
 import com.xiaomy.book_city.admin.builder.ItemQueryBuilder;
 import com.xiaomy.book_city.admin.entity.Item;
@@ -33,24 +34,31 @@ public class ItemManageController {
   @PostMapping()
   public Result addItem(@RequestBody Item item){
     System.out.println(item.toString());
-    return Result.of(itemManageService.addItem(item))
+    return Result.of(1)
         .success("添加章节成功")
         .fail("添加章节失败");
   }
 
   @ApiOperation("修改章节")
-  @PutMapping("/{itemId}/{operator}")
-  public Result updateItem(Item item,@PathVariable("itemId")int itemId,@PathVariable("operator")int operator){
+  @PutMapping()
+  public Result updateItem(@RequestBody Item item){
+    System.out.println(item.toString());
     return Result.of(itemManageService.updateItem(item))
         .success("修改章节成功")
         .fail("修改章节失败");
   }
 
   @ApiOperation("删除章节")
-  @DeleteMapping("/{itemId}/{operator}")
-  public Result deleteItemById(@PathVariable("itemId")int itemId,@PathVariable("operator")int operator){
-    return Result.of(itemManageService.deleteItem(itemId,operator))
+  @DeleteMapping("/{itemId}")
+  public Result deleteItemById(@PathVariable("itemId")Integer[] itemId){
+    return Result.of(itemManageService.deleteItem(itemId))
         .success("删除章节成功")
         .fail("删除章节失败");
+  }
+
+  @ApiOperation("查询某一章节")
+  @GetMapping("/{itemId}")
+  public Result findItemById(@PathVariable("itemId")int itemId){
+    return Result.data(itemManageService.findItemById(itemId));
   }
 }
