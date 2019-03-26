@@ -11,7 +11,6 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-@EnableSwagger2
 public class SwaggerConfig {
   @Bean
   public Docket api() {
@@ -19,8 +18,8 @@ public class SwaggerConfig {
         .apiInfo(apiInfo())
         .select()
         // 自行修改为自己的包路径
-        .apis(RequestHandlerSelectors.basePackage("com.xiaomy.book_city"))
-        .paths(PathSelectors.any())
+        .apis(RequestHandlerSelectors.any()) // 对所有api进行监控
+        .paths(PathSelectors.any()) // 对所有路径进行监控
         .build();
   }
 

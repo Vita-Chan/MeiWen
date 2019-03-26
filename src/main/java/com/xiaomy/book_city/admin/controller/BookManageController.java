@@ -8,6 +8,7 @@ import com.xiaomy.book_city.app.entity.Book;
 import com.xiaomy.book_city.common.result.Result;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ public class BookManageController {
 
   @ApiOperation("查询书本书列表 - 分页")
   @GetMapping
+  @PreAuthorize("hasAuthority('user')")
   public PageInfo<Book> queryBooks(BookQueryBuilder bookQueryBuilder){
     return bookManageService.queryBooks(bookQueryBuilder);
   }

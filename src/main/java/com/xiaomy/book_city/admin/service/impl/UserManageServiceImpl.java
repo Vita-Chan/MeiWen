@@ -7,11 +7,14 @@ import com.xiaomy.book_city.admin.mapper.RoleManageMapper;
 import com.xiaomy.book_city.admin.mapper.UserManageMapper;
 import com.xiaomy.book_city.admin.builder.UserQueryBuilder;
 import com.xiaomy.book_city.admin.service.UserManageService;
+import com.xiaomy.book_city.app.service.UserService;
+import com.xiaomy.book_city.common.error.ConfCenterException;
 import java.util.Date;
 import java.util.List;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserManageServiceImpl implements UserManageService {
@@ -21,6 +24,9 @@ public class UserManageServiceImpl implements UserManageService {
 
   @Autowired
   private RoleManageMapper roleManageMapper;
+
+  @Autowired
+  private UserService userService;
 
   @Override
   public PageInfo<UserVo> queryUsers(UserQueryBuilder userQueryBuilder) {
@@ -47,8 +53,14 @@ public class UserManageServiceImpl implements UserManageService {
 
   @Override
   public int addUser(UserVo userVo) {
+    if(userService.findUserByUsername(userVo.getUserName()) != null){
+      throw new ConfCenterException("用户名已被使用");
+    }
     userVo.setCreateTime(new Date());
-    return userMangerMapper.addUser(userVo);
+    int id = userMangerMapper.addUser(userVo);
+
+    userMangerMapper.addUserRole(userVo.getId(),2);
+    return userVo.getId();
   }
 
   @Override

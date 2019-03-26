@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import java.util.Date;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 
 public class UserVo {
   @ApiModelProperty("用户id")
@@ -20,6 +21,7 @@ public class UserVo {
   private String email;
   @ApiModelProperty("用户锁定")
   private int locked;
+  @NotNull
   @ApiModelProperty("用户昵称")
   private String nickName;
   @ApiModelProperty("性别")
@@ -27,14 +29,18 @@ public class UserVo {
   @ApiModelProperty("手机号")
   private String telephone;
   @ApiModelProperty("修改时间")
+  @NotNull
   private Date updateTime;
   @ApiModelProperty("账号")
   private String userName;
+  @NotNull
   @ApiModelProperty("密码")
   private String password;
   @ApiModelProperty("等级")
   private String level;
 
+  @ApiModelProperty("token")
+  private String token;
   // -------------------------------------- 冗余字段 -----------------------------------
   @ApiModelProperty("所属等级: 1-超级管理员 2-普通管理员 3-作者 4-读者")
   private String grade;
@@ -161,5 +167,13 @@ public class UserVo {
 
   public void setLevel(String level) {
     this.level = level;
+  }
+
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
   }
 }

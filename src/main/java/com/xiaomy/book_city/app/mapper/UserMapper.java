@@ -6,9 +6,11 @@ import com.xiaomy.book_city.app.entity.Buy;
 import com.xiaomy.book_city.app.entity.vo.UserVo;
 import com.xiaomy.book_city.app.entity.vo.BuyVo;
 import com.xiaomy.book_city.app.entity.portion.Collect;
+import com.xiaomy.book_city.common.security.entity.UserDetailsGenerate;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Mapper
 public interface UserMapper {
@@ -33,4 +35,16 @@ public interface UserMapper {
   int addCollect(Collect collect);
 
   int removeCollect(@Param("userId") int userId, @Param("collectId") int collectId);
+
+  String findUserByUsername(@Param("username")String username);
+
+  UserDetailsGenerate findUserUserDetailsGenerateByUsername(@Param("username")String username);
+
+  List<String> findRolesByUserId(@Param("userId") int userId);
+
+  int updateUserToken(@Param("id") int id, @Param("token") String token);
+
+  com.xiaomy.book_city.admin.entity.vo.UserVo findUserVoByUsername(@Param("username")String username);
+
+  com.xiaomy.book_city.admin.entity.vo.UserVo findUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 }

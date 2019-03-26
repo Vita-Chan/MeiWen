@@ -1,6 +1,5 @@
 server:
-  port: 8080
-
+  port: 8081
 spring:
   datasource:
     name: test
@@ -30,4 +29,14 @@ logging:
         book_city:
           mapper: debug
 
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 5000000
+  tokenHead: "Bearer "
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
+      register: "auth/register"
 

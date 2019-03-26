@@ -8,9 +8,12 @@ import com.xiaomy.book_city.app.entity.vo.UserVo;
 import com.xiaomy.book_city.app.entity.portion.Collect;
 import com.xiaomy.book_city.app.mapper.UserMapper;
 import com.xiaomy.book_city.app.service.UserService;
+import com.xiaomy.book_city.common.security.entity.UserDetailsGenerate;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -75,4 +78,37 @@ public class UserServiceImpl implements UserService {
   public int deleteCollect(int userId, int collectId) {
     return userMapper.deleteBrowse(userId,collectId);
   }
+
+  @Override
+  public String findUserByUsername(String username) {
+    return userMapper.findUserByUsername(username);
+  }
+
+  @Override
+  public com.xiaomy.book_city.admin.entity.vo.UserVo findUsernameAndPassword(String username, String password) {
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    String encodePassword = bCryptPasswordEncoder.encode(password);
+    return userMapper.findUsernameAndPassword(username,encodePassword);
+  }
+
+  @Override
+  public UserDetailsGenerate findUserDetailsByUsername(String username) {
+    return userMapper.findUserUserDetailsGenerateByUsername(username);
+  }
+
+  @Override
+  public List<String> findRolesByUserId(int userId) {
+    return userMapper.findRolesByUserId(userId);
+  }
+
+  @Override
+  public com.xiaomy.book_city.admin.entity.vo.UserVo findUserVoByUsername(String username) {
+    return userMapper.findUserVoByUsername(username);
+  }
+
+  @Override
+  public int updateByUserToken(int id, String token) {
+    return userMapper.updateUserToken(id,token);
+  }
+
 }

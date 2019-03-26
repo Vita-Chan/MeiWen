@@ -43,7 +43,16 @@
     where id = #{id}
   </update>
 
-  <insert id="addUser">
+  <insert id="addUserRole">
+    insert into sys_user_role(
+      user_id, role_id
+    ) values (
+      #{userId},
+      #{roleId}
+    )
+  </insert>
+
+  <insert id="addUser"  useGeneratedKeys="true" keyProperty="id" parameterType="com.xiaomy.book_city.admin.entity.vo.UserVo">
     insert into sys_user (
     address,
     create_time,

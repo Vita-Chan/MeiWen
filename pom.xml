@@ -92,6 +92,26 @@
       <version>[7.2.0, 7.2.99]</version>
     </dependency>
 
+    <!--引入jwt-->
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>3.4.0</version>
+    </dependency>
+
+    <!--为了简化我们的工作，这里引入一个比较成熟的JWT类库，叫 jjwt-->
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.9.0</version>
+    </dependency>
+
+    <!--引入security-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+      <version>2.1.2.RELEASE</version>
+    </dependency>
   </dependencies>
 
   <build>

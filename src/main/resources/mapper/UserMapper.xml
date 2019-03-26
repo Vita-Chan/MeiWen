@@ -113,4 +113,34 @@
   <delete id="removeCollect">
     delete from collect where user_id = #{userId} and id = #{collectId}
   </delete>
+
+  <select id="findUserByUsername" resultType="java.lang.String">
+    select token from sys_user where user_name = #{username}
+  </select>
+
+  <select id="findUserUserDetailsGenerateByUsername"
+    resultType="com.xiaomy.book_city.common.security.entity.UserDetailsGenerate">
+    select sys_user.id as id, sys_user.user_name as username, sys_user.password as passwrod,
+    sys_user.token as token
+    from sys_user where user_name = #{username}
+  </select>
+
+  <select id="findRolesByUserId" resultType="java.lang.String">
+    select sys_role.name from sys_user_role left join sys_role on sys_user_role.role_id = sys_role.id
+    where sys_user_role.user_id = #{userId}
+  </select>
+
+  <update id="updateUserToken">
+    update sys_user set
+    <if test="token != null">token = #{token}</if>
+    where id = #{id}
+  </update>
+
+  <select id="findUserVoByUsername" resultType="com.xiaomy.book_city.admin.entity.vo.UserVo">
+    select * from sys_user where user_name = #{username}
+  </select>
+
+  <select id="findUsernameAndPassword" resultType="com.xiaomy.book_city.admin.entity.vo.UserVo">
+    select * from sys_user where user_name = #{username} and password = #{password}
+  </select>
 </mapper>

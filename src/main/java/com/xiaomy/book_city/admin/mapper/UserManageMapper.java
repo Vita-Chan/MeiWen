@@ -20,4 +20,6 @@ public interface UserManageMapper {
   int updateUser(UserVo userVo);
 
   int addUser(UserVo userVo);
+
+  int addUserRole(@Param("userId")int userId,@Param("roleId")int roleId);
 }
